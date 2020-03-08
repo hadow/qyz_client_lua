@@ -56,6 +56,8 @@ end
 
 local function init(params)
     name,gameObject,fields=Unpack(params)
+
+    UIManager.SetAnchor(fields.UISprite_Black)
     unlockfunctiondata()
     EventHelper.SetClick(fields.UIButton_Close,function()
         UIManager.showmaincitydlgs()

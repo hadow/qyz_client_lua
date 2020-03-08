@@ -139,7 +139,7 @@ local function refresh(params)
     -- 法宝会复用此界面，清除所有button选中状态
     for i = 0,(fields.UIList_BagRadioButton.Count - 1) do
         local listItem = fields.UIList_BagRadioButton:GetItemByIndex(i)
-        listItem.Checkbox:Set(false)
+        listItem.Checkbox:Set(false,false)
     end
 
     fields.UIList_BagRadioButton:SetSelectedIndex(BAG_SELECT_TABS[g_SelectedBagType])

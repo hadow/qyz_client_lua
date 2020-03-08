@@ -55,6 +55,7 @@ end
 local function init(params)
     name, gameObject, fields = unpack(params)
 
+    uimanager.SetAnchor(fields.UISprite_Black)
     EventHelper.SetClick(fields.UIButton_Close, function()
         uimanager.hide(name)
         if DlgInfo.callBackHideFunc then

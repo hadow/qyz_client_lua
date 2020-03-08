@@ -312,6 +312,8 @@ end
 local function init(params)
     name, gameObject, fields = unpack(params)
       --print(name, "init")
+    uimanager.SetAnchor(fields.UITexture_Pray)
+    uimanager.SetAnchor(fields.UITexture_Texture)
     quality_showeffects = {
         [cfg.item.EItemColor.BLUE] = {fields.UIGroup_Blue},
         [cfg.item.EItemColor.PURPLE] = {fields.UIGroup_Purple},

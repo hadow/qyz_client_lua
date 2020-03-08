@@ -825,7 +825,7 @@ local function ShowIconByNeed(a,b,c,d,e,f)
 	fields.UIButton_BagIcon.gameObject:SetActive(b)
 	fields.UIButton_Arrows.gameObject:SetActive(c)
 	fields.UIGroup_Chat.gameObject:SetActive(d)
-	fields.UIButton_Voice.gameObject:SetActive(e)
+	--fields.UIButton_Voice.gameObject:SetActive(e)
 	if fields.UIButton_Expression.gameObject.activeSelf  == true and f == false then
 		fields.UIList_Button_Emoji:SetUnSelectedIndex(0)
 	end
@@ -1392,7 +1392,7 @@ local function init(params)
     fields.UISprite_Loosen.gameObject:SetActive(false)
     fields.UISprite_Key.gameObject:SetActive(false)
     fields.UISprite_Voice.gameObject:SetActive(true)
-    fields.UIButton_VoiceButton.gameObject:SetActive(false)
+    --fields.UIButton_VoiceButton.gameObject:SetActive(false)
     fields.UIGroup_Bag.gameObject:SetActive(false)
 	SetChatChannelTag(chatmanager.GetCurChannel())
 	fields.UILabel_Name.text = ""
@@ -1743,69 +1743,69 @@ local function init(params)
 
     end)
 
-    EventHelper.SetClick(fields.UIButton_Voice, function ()
-        if CountVoice == 0 then
-            fields.UIButton_VoiceButton.gameObject:SetActive(true)
-            fields.UIInput_Chat.gameObject:SetActive(false)
-            fields.UIButton_Expression.gameObject:SetActive(false)
-            fields.UIButton_Send.gameObject:SetActive(false)
-            fields.UISprite_Press.gameObject:SetActive(true)
-            fields.UISprite_Key.gameObject:SetActive(true)
-            fields.UISprite_Voice.gameObject:SetActive(false)
-            fields.UILabel_Channel01.gameObject:SetActive(false)
---            fields.UILabel_SpeakTO.gameObject:SetActive(false)
-        else
-            fields.UIButton_VoiceButton.gameObject:SetActive(false)
-            fields.UIInput_Chat.gameObject:SetActive(true)
-            fields.UIButton_Expression.gameObject:SetActive(true)
-            fields.UIButton_Send.gameObject:SetActive(true)
-            fields.UISprite_Press.gameObject:SetActive(false)
-            fields.UISprite_Key.gameObject:SetActive(false)
-            fields.UISprite_Voice.gameObject:SetActive(true)
-            fields.UILabel_Channel01.gameObject:SetActive(true)
---			if chatmanager.GetCurChannel() == CHANNEL.PRIVATE then
---				fields.UILabel_SpeakTO.gameObject:SetActive(true)	
---			end 
-        end
-        CountVoice = ( CountVoice + 1 ) % 2
-    end)
+--    EventHelper.SetClick(fields.UIButton_Voice, function ()
+--        if CountVoice == 0 then
+--            fields.UIButton_VoiceButton.gameObject:SetActive(true)
+--            fields.UIInput_Chat.gameObject:SetActive(false)
+--            fields.UIButton_Expression.gameObject:SetActive(false)
+--            fields.UIButton_Send.gameObject:SetActive(false)
+--            fields.UISprite_Press.gameObject:SetActive(true)
+--            fields.UISprite_Key.gameObject:SetActive(true)
+--            fields.UISprite_Voice.gameObject:SetActive(false)
+--            fields.UILabel_Channel01.gameObject:SetActive(false)
+----            fields.UILabel_SpeakTO.gameObject:SetActive(false)
+--        else
+--            fields.UIButton_VoiceButton.gameObject:SetActive(false)
+--            fields.UIInput_Chat.gameObject:SetActive(true)
+--            fields.UIButton_Expression.gameObject:SetActive(true)
+--            fields.UIButton_Send.gameObject:SetActive(true)
+--            fields.UISprite_Press.gameObject:SetActive(false)
+--            fields.UISprite_Key.gameObject:SetActive(false)
+--            fields.UISprite_Voice.gameObject:SetActive(true)
+--            fields.UILabel_Channel01.gameObject:SetActive(true)
+----			if chatmanager.GetCurChannel() == CHANNEL.PRIVATE then
+----				fields.UILabel_SpeakTO.gameObject:SetActive(true)
+----			end
+--        end
+--        CountVoice = ( CountVoice + 1 ) % 2
+--    end)
 --	printyellow("setclick7")
 
-    EventHelper.SetPress(fields.UIButton_VoiceButton, function(go, bPress) --发送语音小纸条
-        --printyellow("SetPress")
---		if chatmanager.GetCurChannel() == CHANNEL.WORLD then
---			uimanager.ShowSystemFlyText(LocalString.Chat_CannotSendVoiceOnWorldChannel)
+--    EventHelper.SetPress(fields.UIButton_VoiceButton, function(go, bPress) --发送语音小纸条
+--        --printyellow("SetPress")
+----		if chatmanager.GetCurChannel() == CHANNEL.WORLD then
+----			uimanager.ShowSystemFlyText(LocalString.Chat_CannotSendVoiceOnWorldChannel)
+----			return
+----		end
+--
+--		if not CanSend() then
 --			return
 --		end
-
-		if not CanSend() then
-			return 
-		end
-
-        if bPress == true then
-            isPress = true
-			uimanager.show("chat.dlgdialogbox_speak")
-            fields.UISprite_Press.gameObject:SetActive(false)
-            fields.UISprite_Loosen.gameObject:SetActive(true)
-            chatmanager.StartRecordVoice()                     --开始录音
-        else
-			uimanager.hide("chat.dlgdialogbox_speak")
-            fields.UISprite_Press.gameObject:SetActive(true)
-            fields.UISprite_Loosen.gameObject:SetActive(false)
-
-            chatmanager.StopRecord()                           --结束录音
-
-        end
-    end)
-
-    EventHelper.SetDrag(fields.UIButton_VoiceButton, function(o,delta) --发送语音小纸条
---        printyellow("SetDrag")
-        if delta.y > 0 then
-            fields.UISprite_Press.gameObject:SetActive(true)
-            fields.UISprite_Loosen.gameObject:SetActive(false)
-        end
-
-    end)
+--
+--        if bPress == true then
+--            isPress = true
+--			uimanager.show("chat.dlgdialogbox_speak")
+--            fields.UISprite_Press.gameObject:SetActive(false)
+--            fields.UISprite_Loosen.gameObject:SetActive(true)
+--            chatmanager.StartRecordVoice()                     --开始录音
+--        else
+--			uimanager.hide("chat.dlgdialogbox_speak")
+--            fields.UISprite_Press.gameObject:SetActive(true)
+--            fields.UISprite_Loosen.gameObject:SetActive(false)
+--
+--            chatmanager.StopRecord()                           --结束录音
+--
+--        end
+--    end)
+--
+--    EventHelper.SetDrag(fields.UIButton_VoiceButton, function(o,delta) --发送语音小纸条
+----        printyellow("SetDrag")
+--        if delta.y > 0 then
+--            fields.UISprite_Press.gameObject:SetActive(true)
+--            fields.UISprite_Loosen.gameObject:SetActive(false)
+--        end
+--
+--    end)
 
 
 	EventHelper.SetListClick(fields.UIList_Bag, function(listItem)

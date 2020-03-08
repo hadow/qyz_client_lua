@@ -154,11 +154,11 @@ end
 local function AdjustDialogTextPosition(isMoveDown)
     local pos = UILabel_Name.gameObject.transform.localPosition
     if isMoveDown then
-          UILabel_Name.gameObject.transform.localPosition = Vector3(pos.x,pos.y-LABEL_MOVESIZE,pos.z)
-          uiMoveSize =  uiMoveSize - LABEL_MOVESIZE
+        UILabel_Name.gameObject.transform.localPosition = Vector3(pos.x,pos.y-LABEL_MOVESIZE,pos.z)
+        uiMoveSize =  uiMoveSize - LABEL_MOVESIZE
     else
-          UILabel_Name.gameObject.transform.localPosition = Vector3(pos.x,pos.y+LABEL_MOVESIZE,pos.z)
-          uiMoveSize =  uiMoveSize + LABEL_MOVESIZE
+        UILabel_Name.gameObject.transform.localPosition = Vector3(pos.x,pos.y+LABEL_MOVESIZE,pos.z)
+        uiMoveSize =  uiMoveSize + LABEL_MOVESIZE
     end
 
     pos = UILabel_Content.gameObject.transform.localPosition
@@ -177,8 +177,8 @@ end
 local function show(params)
     -- print(name, "show")
     if params == nil then
-       -- printyellow("dlgtaskreward show params is nil")
-       return
+        -- printyellow("dlgtaskreward show params is nil")
+        return
     end
 
     taskid = params.taskid
@@ -225,8 +225,8 @@ local function NextBtnOnClick()
         local task = taskmanager.GetTask(taskid)
         if task and task.reward then
             if task.reward.exp >0 or task.reward.money > 0 or task.reward.ingot > 0 then
-               UIList_Currency.gameObject:SetActive(true)
-               UIList_Currency:Clear()
+                UIList_Currency.gameObject:SetActive(true)
+                UIList_Currency:Clear()
             end
             -- exp
             if task.reward.exp > 0 then
@@ -273,8 +273,8 @@ local function NextBtnOnClick()
 
                             local itemtex = listitem.Controls["UITexture_Icon"]
                             if itemtex then
-                               ---- printyellow(itemdata.icon)
-                               itemtex:SetIconTexture(itemdata.icon)
+                                ---- printyellow(itemdata.icon)
+                                itemtex:SetIconTexture(itemdata.icon)
                             end
 
                             local spriteQuality = listitem.Controls["UISprite_Quality"]

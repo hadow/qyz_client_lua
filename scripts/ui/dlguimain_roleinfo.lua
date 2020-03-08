@@ -5,7 +5,7 @@ local math              = math
 local EventHelper       = UIEventListenerHelper
 local uimanager         = require("uimanager")
 local network           = require("network")
-
+local avatarmanager     = require("roleheadavatarmanager")
 local PlayerRole
 local gameObject
 local name
@@ -58,7 +58,8 @@ local function RefreshRoleInfo()
         fields.UILabel_HeroLV.text = playerRole.m_Level
         fields.UIProgressBar_EXP.value = expRate
         --fields.UILabel_Vip.text = playerRole.m_VipLevel
-        fields.UISprite_HeroHead.spriteName = playerRole:GetHeadIcon()
+        --fields.UISprite_HeroHead.spriteName = playerRole:GetHeadIcon()
+        fields.UITexture_HeroHead.mainTexture = avatarmanager.getavatar()
         --prologue
         local PrologueManager = require"prologue.prologuemanager"
         if PrologueManager.IsInPrologue() then

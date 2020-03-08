@@ -24,15 +24,15 @@ local DialogStop
 local audioSource = nil
 
 local function destroy()
-  if DialogStop then
-      uiEctype.ContinueNav()
-  end
+    if DialogStop then
+        uiEctype.ContinueNav()
+    end
 end
 
 local function Clear()
     -- for i,v in pairs(DialogFrame) do
     --     printyellow(v.frame,fields)
-        -- fields[UISprite_Background].gameObject:SetActive(false)
+    -- fields[UISprite_Background].gameObject:SetActive(false)
     -- end
 end
 
@@ -103,10 +103,10 @@ end
 
 
 return {
-  init = init,
-  show = show,
-  hide = hide,
-  update = update,
-  destroy = destroy,
-  refresh = refresh,
+    init = init,
+    show = show,
+    hide = hide,
+    update = update,
+    destroy = destroy,
+    refresh = refresh,
 }

@@ -6801,6 +6801,7 @@ msg.add_type('gnet', {
 name='PlatType',
 TEST = 0,
 ONESDK = 1,
+GOOGLEPLAY = 2,
 { name='plat', type='int'},
 })
 msg.add_type('gnet', {

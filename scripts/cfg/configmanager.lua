@@ -3,13 +3,15 @@
 
 local os = require "cfg.structs"
 local AllCsvCfgs
+local AllCsvLoadPath
 function create_datastream(file)
     return os.new(LuaHelper.GetPath("config/csv/" .. file))
 end
 
 local function loadCsv()
 --    printyellow("load csv")
-    AllCsvCfgs = require "cfg.configs"
+--    AllCsvCfgs = require "cfg.configs"
+    AllCsvLoadPath = require "cfg.csvloadpath"
 end
 
 local function init()
@@ -18,9 +20,38 @@ local function init()
  --   printt(AllCsvCfgs["skill"])
 end
 
+local function loadConfig(configname)
+
+    local s = AllCsvLoadPath[configname]
+    if not s then
+        return nil
+    end
+    local fs = create_datastream(s.output)
+    local method = 'get_' .. s.type:gsub('%.', '_')
+    if not s.single then
+        local c = {}
+        for i = 1, fs:get_int() do
+            local v = fs[method](fs)
+            c[v[s.index]] = v
+        end
+        AllCsvCfgs[s.name] = c
+    else
+        if fs:get_int() ~= 1 then error('single config size != 1') end
+        AllCsvCfgs[s.name] = fs[method](fs)
+    end
+    fs:close()
+end
+
+local index = 0
 local function getConfig(configname)
     --printyellow(configname)
     --printt(AllCsvCfgs[configname])
+
+    if not AllCsvCfgs or not AllCsvCfgs[configname] then
+        loadConfig(configname)
+        index = index+1
+        print("load config index :"..index..configname)
+    end
     if AllCsvCfgs then
         return AllCsvCfgs[configname]
     end

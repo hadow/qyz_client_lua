@@ -470,7 +470,8 @@ function HumanoidAvatar:Generate()
    if not self.m_Character or not self.m_Character.m_Object or self:IsLoadingComponent() then return end
    self.m_bNeedGenerateModel = false
    self.m_Character.m_Object:SetActive(false)
-   local trans = self.m_Character.m_Object.transform:FindChild("Bip001")
+    --transform:FindChild 函数已废弃
+   local trans = self.m_Character.m_Object.transform:Find("Bip001")
    local bbb = nil
    if trans then bbb = trans.gameObject end
    if not bbb then return end
@@ -625,7 +626,7 @@ function HumanoidAvatar:AttachWeaponToBone(weaponTransform,weaponID,bLeftSkeleto
          --       printyellow("==========transformBone1",transformBone)
          --       printyellow("==========transformBone2",transformBone:GetClassType())
          --       printyellow("==========transformBone3",transformBone.name)
-         --   end
+         --   end'AttachWeaponToBone'
         if transformBone then
 
             weaponTransform.gameObject:SetActive(true)
@@ -815,7 +816,7 @@ function HumanoidAvatar:AttachEquipSfx()
                                 if self.m_Profession ~= cfg.role.EProfessionType.GUIWANGZONG then
                                     transformBone = self.m_Character:GetAttachBone(v.attachPoint,true)
                                 else
-                                    local boneRoot = self.m_Character.m_Object.transform:FindChild("Bip001")
+                                    local boneRoot = self.m_Character.m_Object.transform:Find("Bip001")
                                     if v.sfxType == attachsfxinfo.EquipSfxType.WEAPON_LEFT  then
                                         boneRoot = self.m_Character:GetAttachBone("Bip001 L Clavicle")
                                     else

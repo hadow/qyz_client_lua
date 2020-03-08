@@ -484,6 +484,8 @@ end
 local function init(params)
 --	FriendManager.init()
    	name, gameObject, fields = unpack(params)
+
+    uimanager.SetAnchor(fields.UISprite_Black)
     RoleSkillInfo = RoleSkill.GetRoleSkillInfo()
     CloseDialog()
 

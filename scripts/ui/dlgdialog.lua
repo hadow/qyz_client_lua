@@ -18,7 +18,7 @@ local VipChargeManager   = require "ui.vipcharge.vipchargemanager"
 local MultiEctypeManger  = require "ui.ectype.multiectype.multiectypemanager"
 local StoryEctypeManager = require "ui.ectype.storyectype.storyectypemanager"
 local PetManager        = require"character.pet.petmanager"
-
+local anchorManager     = require "ui.dlgdialog_anchor"
 local gameObject
 local name
 local fields
@@ -295,6 +295,7 @@ local function init(params)
     name, gameObject, fields    = unpack(params)
 	  RegisterAllUnRead()
 
+    --anchorManager.ResetWidget(fields)
     EventHelper.SetListSelect(fields.UIList_Tab,function(item)
         --此处还可以用tab名切换如 UIManager.changetab(name,"testtab.tabtest1")
         --changetab 也有uishowtype 的可选参数，参数说明见文档

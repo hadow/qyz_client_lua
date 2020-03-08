@@ -43,6 +43,8 @@ end
 
 local function init(params)
     m_Name, m_GameObject, m_Fields = Unpack(params)
+
+    UIManager.SetAnchor(fields.UISprite_Black)
 end
 
 return{

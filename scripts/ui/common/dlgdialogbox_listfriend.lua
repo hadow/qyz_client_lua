@@ -110,6 +110,8 @@ end
 
 local function init(params)
     name,gameObject,fields=Unpack(params)
+
+    UIManager.SetAnchor(fields.UISprite_Black)
     EventHelper.SetClick(fields.UIButton_Close,function ()
         UIManager.hide(name)
     end)    

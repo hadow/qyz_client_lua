@@ -89,6 +89,8 @@ end
 
 local function init(params)
     name, gameObject, fields = unpack(params)
+
+    UIManager.SetAnchor(fields.UISprite_Black)
     EventHelper.SetClick(fields.UIButton_CloseRewards, function()
         UIManager.hide(name)
 	end)

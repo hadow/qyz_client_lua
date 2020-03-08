@@ -44,7 +44,8 @@ local function startshow()
     reset()
     
     if changepower > 0 then
-        fields.UILabel_AddPower.text = string.format("+%d",changepower)
+        --fields.UILabel_AddPower.text = string.format("+%d",changepower)
+        fields.UILabel_AddPower.text = changepower
     else
         fields.UILabel_ReducePower.text = changepower
     end

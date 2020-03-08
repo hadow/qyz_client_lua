@@ -18,7 +18,8 @@ function HeadInfo:SetActive(comp,b)
 end
 
 function HeadInfo:TurnHPProgressColor(b)
-    self.m_SpriteForeground.color = b and GreenColor or RedColor
+    --modify by haodd 20200306
+    --self.m_SpriteForeground.color = b and GreenColor or RedColor
 end
 
 function HeadInfo:ShowName(name)

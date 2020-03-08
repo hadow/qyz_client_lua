@@ -330,6 +330,8 @@ end
 local function init(params)
 	name, gameObject, fields = unpack(params)
 
+	UIManager.SetAnchor(fields.UITexture_BG)
+
 end
 
 return {

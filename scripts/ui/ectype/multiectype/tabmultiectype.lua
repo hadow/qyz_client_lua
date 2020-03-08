@@ -23,11 +23,37 @@ local num_star
 local function NumToCharacter(num)
     if num == 1 then
 		-- printyellow(num)
-        return "简单"
+        return "简\n单"
     elseif num == 2 then
-        return "普通"
+        return "普\n通"
     elseif num == 3 then
-        return "困难"
+        return "困\n难"
+	else
+		return ""
+	end
+end
+
+local function NumToLevelSprite(num)
+
+	if num == 1 then
+		return "Sprite_EasyLevel"
+	elseif num == 2 then
+		return "Sprite_NormalLevel"
+	elseif num == 3 then
+		return "Sprite_DifficultLevel"
+	else
+		return ""
+	end
+end
+
+local function NumToStarSprite(num)
+
+	if num == 1 then
+		return "Sprite_Star_One"
+	elseif num == 2 then
+		return "Sprite_Star_Two"
+	elseif num == 3 then
+		return "Sprite_Star_Three"
 	else
 		return ""
 	end
@@ -136,8 +162,8 @@ local function CanSendScroll(section)
 		if not prevEctype or starMatrix[prevEctype.groupid] and starMatrix[prevEctype.groupid][prevEctype.sectionid] then --没有前置关或前置关已经完成
 			return true
 		else
-			local content = string.format(LocalString.MultiEctype_NeedToComplete,prevEctype.storyname .."·"..NumToCharacter(prevEctype.difficulty))
-
+			--local content = string.format(LocalString.MultiEctype_NeedToComplete,prevEctype.storyname .."·"..NumToCharacter(prevEctype.difficulty))
+			local content = string.format(LocalString.MultiEctype_NeedToComplete,prevEctype.storyname)
 			UIManager.show("dlgalert_reminder_singlebutton",{content = content})
 			return false
 		end
@@ -170,7 +196,7 @@ local function RefreshRightButton(section)
 				local roleinfo = {}
 				roleinfo.roleid = PlayerRole:Instance().m_Id
 				table.insert(roleinfos,roleinfo)
-				local title = cur_section.storyname .."·"..NumToCharacter(cur_section.difficulty)
+				--local title = cur_section.storyname .."·"..NumToCharacter(cur_section.difficulty)
 				MultiEctypeManager.SendCEnrollMultiStoryEctype( lx.gs.map.msg.CEnrollMultiStoryEctype.SINGLE,section.id)
 
 
@@ -264,7 +290,11 @@ local function DisplayAll()
 	for key,section in ipairs (sortMultiInfo) do
 		local listItem = fields.UIList_Level:AddListItem()
 
-		listItem.Controls["UILabel_Theme"].text = section.storyname .."·"..NumToCharacter(section.difficulty)
+		--listItem.Controls["UILabel_Theme"].text = section.storyname .."·"..NumToCharacter(section.difficulty)
+		listItem.Controls["UILabel_Theme"].text = section.storyname
+		listItem.Controls["UILabel_LevelDes"].text=NumToCharacter(section.difficulty)
+		listItem.Controls["UISprite_Level"].spriteName =NumToLevelSprite(section.difficulty)
+		listItem.Controls["UISprite_StarNum"].spriteName =NumToStarSprite(section.difficulty)
 		local liststar = listItem.Controls["UIList_Star"]
 		local starmatrix = MultiEctypeManager.GetStarMatrix()
 		local num = 0

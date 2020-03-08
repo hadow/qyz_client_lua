@@ -51,6 +51,8 @@ end
 
 local function init(params)
     name,gameObject,fields = unpack(params)
+
+    UIManager.SetAnchor(fields.UISprite_Black)
 	gameObject.transform.localPosition = Vector3(0,0,-3500)
     EventHelper.SetClick(fields.UIButton_Close,function()
         UIManager.hide(name)

@@ -248,6 +248,7 @@ end
 local function LoadTransitScene(params)
     --SceneManager.Instance.UseSteamedScene=false
     SceneManager.Instance:ChangeMap("transit")
+    CameraManager.setup()
 end
 
 

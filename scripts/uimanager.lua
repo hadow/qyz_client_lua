@@ -320,17 +320,18 @@ local function hide(view_name)
         print(format("view:%s not show!", view_name))
         return
     end
-    if data.uifadeout ~=nil then
-        local dlghiding = require "ui.dlghiding"
-        UIEventListenerHelper.SetPlayTweenFinish(data.uifadeout, function(uifadeout)
-            dlghiding.OnFadeOutEnd()
-            onhide(view_name)
-        end)
-        data.uifadeout:Play(true)
-        dlghiding.OnFadeOutBegin()
-    else
-        onhide(view_name)
-    end
+    --if data.uifadeout ~=nil then
+    --    local dlghiding = require "ui.dlghiding"
+    --    UIEventListenerHelper.SetPlayTweenFinish(data.uifadeout, function(uifadeout)
+    --        dlghiding.OnFadeOutEnd()
+    --        onhide(view_name)
+    --    end)
+    --    data.uifadeout:Play(true)
+    --    dlghiding.OnFadeOutBegin()
+    --else
+    --    onhide(view_name)
+    --end
+    onhide(view_name)
     local NoviceGuideTrigger=require"noviceguide.noviceguide_trigger"
     NoviceGuideTrigger.HideDialog(view_name)
 end
@@ -530,6 +531,42 @@ local function refreshdlgdialog(dialog_view_name,tabindex)
 	showorrefresh("dlgdialog",{view_name = dialog_view_name,tab_index = tabindex})
 end
 
+local function showdialogonlyself(view_name,params,tabindex)
+
+    beforeshowdialog()
+
+    if tabindex == nil then tabindex = 1 end
+    local data = get_view_data(view_name)
+    data.isdialog = true
+    data.initedtabs = {} -- tab_name,true
+    data.tabgroupstates = {}
+    data.dialog_view_name = view_name
+
+    if not DialogStack:IsEmpty() then
+        local lastview_name = DialogStack:Top()
+        if lastview_name == view_name then
+            return
+        end
+        hideloadedview(lastview_name)
+    else
+        hidemaincitydlgs()
+    end
+
+    DialogStack:Push(view_name)
+
+
+    if hasscript(view_name) then
+        showloading()
+        if(hasmethod(view_name,"showdialog")) and not isuishowtype(view_name,UIShowType.ShowImmediate)  then
+            call(view_name, "showdialog", params)
+        else
+            show(view_name, params)
+        end
+    else
+        onshow(view_name,params)
+    end
+
+end
 
 local function showdialog(view_name, params,tabindex)
     if Local.LogModuals.UIManager then
@@ -633,7 +670,7 @@ local function hidecurrentdialog()
         return
     else
         local currentview_name = DialogStack:Top()
-        hidedialog(currentview_name)
+        hidedialog(currentview_name,true)
         if currentview_name == "family.dlgfamily" then
             local familymgr = require("family.familymanager")
             familymgr.CheckAllFamilyDlgHide()
@@ -684,10 +721,9 @@ onshow = function (view_name, params)
 		hideloadedview(view_name)
 	elseif hasscript(view_name) then
         refresh(view_name, params)
-        if data.uifadein ~=nil then
-            data.uifadein:Play(true)
-			--printyellow("fadein",data.uifadein)
-        end
+        --if data.uifadein ~=nil then
+        --    data.uifadein:Play(true)
+        --end
     end
 
 end
@@ -1254,6 +1290,7 @@ return {
     isshow               = isshow,
     hasloaded            = hasloaded,
     showdialog           = showdialog,
+    showdialogonlyself   = showdialogonlyself,
     hidedialog           = hidedialog,
     hidecurrentdialog    = hidecurrentdialog,
     currentdialogname    = currentdialogname,

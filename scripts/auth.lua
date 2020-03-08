@@ -8,11 +8,13 @@ local network = require "network"
 local login
 local gameevent = require "gameevent"
 local message = require "common.message"
-local scenemanager = require "scenemanager"
+--local scenemanager = require "scenemanager"
+--local dlglogin = require "ui.dlglogin"
 
-
-local username = "1_5"..SystemInfo.deviceUniqueIdentifier
-local token = "abcdefghi"
+--local username = "1_6"..SystemInfo.deviceUniqueIdentifier
+--local token = "abcdefghi"
+local username = "115051502325418100686"
+local token = "4/vQHkpOZOoZFhJbR7OPYC41sK1ePDrQiHggvPvslSBxl1NUxiuRCVLLaufr0UYyOjs7OIyK2yOrosS4zZHcOGSUw"
 
 local ToString = Slua.ToString
 local ToBytes = Slua.ToBytes
@@ -33,7 +35,8 @@ local zoneid
  local function onmsg_Challenge(d)
 	print("onmsg_Challenge serverid = "..d.serverid)
 	version = d.version;
-	plattype = gnet.PlatType.ONESDK;
+	--plattype = gnet.PlatType.ONESDK;
+     --plattype = gnet.PlatType.GOOGLEPLAY;
 	login.serverid = d.serverid;
 	zoneid = d.serverid
 	if Application.platform == UnityEngine.RuntimePlatform.Android then
@@ -45,27 +48,33 @@ local zoneid
 			oss = "3"
 		end
 	elseif Application.platform == UnityEngine.RuntimePlatform.WindowsPlayer then
-		oss = "4"
-    else
-        oss = "0"
-	end
+     oss = "4"
+     else
+     oss = "0"
+     end
 
-	platform = Game.Platform.Interface.Instance:GetSDKPlatformName();
-	local re = gnet.Response({
-		user_identity = username,
-		token = token,
-		plattype = { plat = plattype },
-		deviceid = deviceid,
-		os = oss,
-		platform = platform
-	})
+     platform = Game.Platform.Interface.Instance:GetSDKPlatformName()
+     print("auth.lua receive platform ->" .. platform)
+     --print("compress token->"..compressToken)
+     local re = gnet.Response({
+     user_identity = username,
+     --添加前缀,区分登陆方式 1:facebook 0:google
+     --token = dlglogin.get_login_code()..token,
+     --token = string.sub(token,1,10),
+     token = Game.Platform.Interface.Instance:GetLoginCode()..token,
+     plattype = { plat = plattype },
+     deviceid = deviceid,
+     os = oss,
+     platform = platform
+     })
 	message.send(re, false)
  end
 
  local function onmsg_KeyExchange(d)
- 	local nonce = ToString(LuaHelper.GenKeyExchangeNonceAndSetInOutSecurity(ToBytes(username), ToBytes(token), ToBytes(d.nonce)))
+ 	local nonce = ToString(LuaHelper.GenKeyExchangeNonceAndSetInOutSecurity(ToBytes(username), ToBytes(Game.Platform.Interface.Instance:GetLoginCode()..token), ToBytes(d.nonce)))
  	local kick = 1
  	message.create_and_send("gnet.KeyExchange", {nonce = nonce, kick_olduser = kick}, false)
+     print("auth.lua key exchange")
  end
 
 
@@ -148,11 +157,14 @@ local function InitSuccess()
 end
 
 local function LoginSuccess()
+    print("slua receive:loginsuccess logged in platform->")
 	-- printyellow("LoginSuccess")
 	if not LoggedInPlatform then
 		LoggedInPlatform = true
-		username = Game.Platform.Interface.Instance:GetUserName();
-		token = Game.Platform.Interface.Instance:GetToken();
+		username = Game.Platform.Interface.Instance:GetUserName()
+		--token = ToString(LuaHelper.GZipStrings(Game.Platform.Interface.Instance:GetToken()))
+        token = Game.Platform.Interface.Instance:GetToken()
+        print("user id->" .. username .. " token ->" .. token)
 	end
 
     network.SetServer()

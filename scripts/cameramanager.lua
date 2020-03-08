@@ -497,8 +497,8 @@ local function TouchCameraAngleManager()
         local curTouch = Input.GetTouch(actFingerId)
         local deltaPos = curTouch.deltaPosition
         if deltaPos.magnitude < 0.3 then return end
-        angleSpeedX = deltaPos.x  * 10 * resolutionCoeff.x
-        angleSpeedY = -deltaPos.y * 5  * resolutionCoeff.y
+        angleSpeedX = deltaPos.x  * 5 * resolutionCoeff.x
+        angleSpeedY = -deltaPos.y * 2.5  * resolutionCoeff.y
     end
 end
 
@@ -837,6 +837,7 @@ end
 return {
     init = init,
     reset = reset,
+    setup = setup,
     CameraAssist = CameraAssist,
     CameraEuler = CameraEuler,
     CameraModeType = CameraModeType, -- 相机类型

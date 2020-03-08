@@ -88,45 +88,45 @@ local function Retry()
 end
 
 local function late_update()
-    if isDone or bException then return end
-    if not broadcast and elapsedTime < timeout then
-        elapsedTime = elapsedTime + Time.deltaTime
-        if www then
-            if www.isDone then
-                if IsNull(www.error) then
-                    broadcast = www.text
-                    ReleaseWWW()
-                    broadcast = ParseHtml(broadcast)
-                    if broadcast then
-                        if pcall(function() LoadBroadCast(broadcast) end) then
-                            isDone = true
-                            if uimanager.isshow"dlgnotice" then
-                                uimanager.call("dlgnotice","ShowContents")
-                            end
-                            StopUpdate()
-                        else
-                            ShowBroadcastFailed(1)
-                        end
-                    end
-                else
-                    if retry > 0 then
-                        Retry()
-                    else
-                        ShowBroadcastFailed(2)
-                    end
-                    --
-                end
-            end
-        else
-            www = WWW(url)
-        end
-    else
-        if retry > 0 then
-            Retry()
-        else
-            ShowBroadcastFailed(3)
-        end
-    end
+    --if isDone or bException then return end
+    --if not broadcast and elapsedTime < timeout then
+    --    elapsedTime = elapsedTime + Time.deltaTime
+    --    if www then
+    --        if www.isDone then
+    --            if IsNull(www.error) then
+    --                broadcast = www.text
+    --                ReleaseWWW()
+    --                broadcast = ParseHtml(broadcast)
+    --                if broadcast then
+    --                    if pcall(function() LoadBroadCast(broadcast) end) then
+    --                        isDone = true
+    --                        if uimanager.isshow"dlgnotice" then
+    --                            uimanager.call("dlgnotice","ShowContents")
+    --                        end
+    --                        StopUpdate()
+    --                    else
+    --                        ShowBroadcastFailed(1)
+    --                    end
+    --                end
+    --            else
+    --                if retry > 0 then
+    --                    Retry()
+    --                else
+    --                    ShowBroadcastFailed(2)
+    --                end
+    --                --
+    --            end
+    --        end
+    --    else
+    --        www = WWW(url)
+    --    end
+    --else
+    --    if retry > 0 then
+    --        Retry()
+    --    else
+    --        ShowBroadcastFailed(3)
+    --    end
+    --end
 end
 
 local function init()

@@ -736,9 +736,10 @@ local function init()
 		{ "lx.gs.pay.SPayReturnInfo", OnMsg_SPayReturnInfo },
 		{ "lx.gs.pay.SGetPayReturn", OnMsg_SGetPayReturn },
     } )
+
 	if Local.HideVip then
 		-- 隐藏兑换码和积分返还界面
-		HiddenTabs = { [7] = true,[8] = true,}
+		HiddenTabs = { [8] = true,[8] = true,}
 	end
 
 

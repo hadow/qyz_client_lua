@@ -126,6 +126,8 @@ end
 
 local function init(params)
 	name, gameObject, fields = unpack(params)
+
+	UIManager.SetAnchor(fields.UISprite_Black)
 	g_AllDialogs = ConfigManager.getConfig("dialog")
 
 	gameObject.transform.localPosition = Vector3(0,0,-600)

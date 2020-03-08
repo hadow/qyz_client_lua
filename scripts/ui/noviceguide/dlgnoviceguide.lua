@@ -94,7 +94,7 @@ local function DisplayNPC()
             m_Fields.UILabel_Figure.text=npcData.text
             --local PlayerRole=require"character.playerrole"
             --if PlayerRole.Instance().m_Gender==cfg.role.GenderType.MALE then
-                m_Fields.UITexture_Figure:SetIconTexture("npc_biyao")
+                --m_Fields.UITexture_Figure:SetIconTexture("npc_biyao")
             --elseif PlayerRole.Instance().m_Gender==cfg.role.GenderType.FEMALE then
                 --m_Fields.UITexture_Figure:SetIconTexture("npc_zhangxiaofan")
             --end

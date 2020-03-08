@@ -427,7 +427,8 @@ local function ResetBagSlot(listItem)
 		listItem.gameObject:SetActive(true)
 		listItem:SetIconTexture("null")
 		listItem:SetText("UILabel_Amount", 0)
-		listItem.Controls["UISprite_Quality"].color = Color(1,1,1,1)
+		--listItem.Controls["UISprite_Quality"].color = Color(1,1,1,1)
+		--listItem.Controls["UISprite_Quality"].gameObject:SetActive(false)
 		listItem:SetText("UILabel_AnnealLevel", "+0")
 		listItem.Data = nil
 		listItem.Controls["UISprite_Lock"].gameObject:SetActive(false)
@@ -436,7 +437,7 @@ local function ResetBagSlot(listItem)
         end
 		ExtendedGameObject.SetActiveRecursely(listItem.Controls["UIGroup_Slots"].gameObject, false)
 		listItem.Controls["UIGroup_Slots"].gameObject:SetActive(true)
-		listItem.Controls["UISprite_Quality"].gameObject:SetActive(true)
+		listItem.Controls["UISprite_Quality"].gameObject:SetActive(false)
 	end
 end
 -- UIGridWrapContent组件初始化函数
@@ -549,8 +550,8 @@ local function SetBagSlotBasicInfo(listItem, item, bagType, bNotShowCD, bNotShow
 	listItem:SetIconTexture(item:GetTextureName())
 	-- 品质
 	listItem.Controls["UISprite_Quality"].gameObject:SetActive(true)
-	listItem.Controls["UISprite_Quality"].spriteName = "Sprite_ItemQuality"
-	listItem.Controls["UISprite_Quality"].color = colorutil.GetQualityColor(item:GetQuality())
+	listItem.Controls["UISprite_Quality"].spriteName = "Sprite_Quality_"..(item:GetQuality())
+	--listItem.Controls["UISprite_Quality"].color = colorutil.GetQualityColor(item:GetQuality())
 	-- 绑定
 	listItem.Controls["UISprite_Binding"].gameObject:SetActive(item:IsBound())
 

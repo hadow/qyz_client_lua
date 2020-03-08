@@ -479,6 +479,7 @@ end
 local function init(params)
     name, gameObject, fields = unpack(params)
 
+    UIManager.SetAnchor(fields.UISprite_Black)
     EventHelper.SetClick(fields.UIButton_JewelryBag_Close, function()
         if g_CurButtonStatus == BUTTON_STATUS.UPDATE_JEWELRY then
             SetButtons(g_PreButtonStatus)

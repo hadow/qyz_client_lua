@@ -77,9 +77,9 @@ local function refresh(params)
 end 
 
 local function second_update()
-	seconds = seconds - 1
-	if seconds == 0 then
-		seconds = 2
+	seconds = seconds + Time.deltaTime
+	if seconds >= 4 then
+		seconds = 0
 		UIManager.hide(name)
 	end
 end

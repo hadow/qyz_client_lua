@@ -134,7 +134,7 @@ local function update()
     if cntDown then
         cntDown = cntDown - Time.deltaTime
         if cntDown < 0 then
-            TweenAlpha.Begin(fields.UITexture_CopyName.gameObject,1,0)
+            TweenAlpha.Begin(fields.UITexture_CopyName.gameObject,1,0,0)
             cntDown = nil
         end
     end

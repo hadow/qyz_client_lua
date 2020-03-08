@@ -254,7 +254,7 @@ end
 function Mount:OnLoaded(go)
     Character.OnLoaded(self,go)
     if go and self.m_Player and self.m_Player:IsRole() then
-        local skin=go.transform:FindChild(self.m_ModelPath)
+        local skin=go.transform:Find(self.m_ModelPath)
         if skin then
             local meshRenderList=skin:GetComponentsInChildren(SkinnedMeshRenderer,true)
             for i=1,meshRenderList.Length do

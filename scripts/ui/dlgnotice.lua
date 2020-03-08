@@ -58,6 +58,9 @@ end
 
 local function init(params)
   name, gameObject, fields = unpack(params)
+
+
+    uimanager.SetAnchor(fields.UITexture_Texture)
   currIndex = 1
 
   EventHelper.SetClick(fields.UIButton_Return,function()

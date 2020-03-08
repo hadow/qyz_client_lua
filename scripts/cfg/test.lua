@@ -31,4 +31,4 @@ end
 
 local cfgs = require "cfg.configs"
 
-print(dump_table(cfgs))
+--print(dump_table(cfgs))

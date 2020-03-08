@@ -322,8 +322,10 @@ local function SetParticleSystemScale(gameObject,scale)
     for i = 1,allParticleSystem.Length do
         local particleSystem = allParticleSystem[i]
         if particleSystem then
-            particleSystem.startSize = particleSystem.startSize * scale
-            particleSystem.startSpeed = particleSystem.startSpeed * scale
+            --particleSystem.startSize = particleSystem.startSize * scale
+            --particleSystem.startSpeed = particleSystem.startSpeed * scale
+            particleSystem.main.startSize = UnityEngine.ParticleSystem.MinMaxCurve(math.min(1,scale),math.max(1,scale))
+            particleSystem.main.startSpeed = UnityEngine.ParticleSystem.MinMaxCurve(math.min(1,scale),math.max(1,scale))
         end
     end
 end

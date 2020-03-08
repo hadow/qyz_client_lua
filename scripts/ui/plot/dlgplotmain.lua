@@ -122,6 +122,7 @@ local function init(params)
     SetPlotUIAnchor(fields.UIGroup_Talk)
     SetPlotUIAnchor(fields.UIGroup_UIEffect)
 
+
     ModFadeInOut.init(name, gameObject, fields)
     ModTalk.init(name, gameObject, fields)
     ModUIEffect.init(name, gameObject, fields)

@@ -184,6 +184,7 @@ end
 local function init(params)
   name, gameObject, fields = unpack(params)
 
+    uimanager.SetAnchor(fields.UISprite_Black)
   uiList_Battle = {}
   for i=1,3 do
       uiList_Battle[i] = {}

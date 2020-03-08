@@ -14,7 +14,8 @@ function GroundProbe:__new(player)
 end
 
 function GroundProbe:OnLoaded(gameObject)
-    if self.m_Object then 
+    if self.m_Object then
+
         return
     end
     self.m_Object = UnityEngine.GameObject("GroundProbe")
@@ -23,13 +24,13 @@ function GroundProbe:OnLoaded(gameObject)
     --self.m_Object.transform.parent = self.m_Player.m_Object.transform
     self.m_HeightProbe = Probe:new("HeightProbeObject",self.m_Object)
     self.m_PositionProbe = Probe:new("PositionProbeObject",self.m_Object)
-    self.m_HeightProbe:ChangeSpeed(self.m_Speed)
+
     --printt(self.m_Player.m_Pos)
     local playerPos = Vector3(self.m_Player.m_Pos.x, SceneManager.GetHeight(self.m_Player.m_Pos), self.m_Player.m_Pos.z)
     --printt(playerPos)
     self.m_HeightProbe:SetPos(playerPos)
     self.m_PositionProbe:SetPos(playerPos)
-
+    self.m_HeightProbe:ChangeSpeed(self.m_Speed)
     self.m_Pos = playerPos
 end
 
@@ -161,6 +162,9 @@ end
 
 function GroundProbe:IsOnNavMesh()
     local agent = self:GetNavMeshAgent()
+    if agent == nil then
+        return false
+    end
     return agent.isOnNavMesh
 end
 
@@ -188,6 +192,8 @@ end
 
 function GroundProbe:OnSceneLoaded()
     if self.m_Player and self.m_Object then
+        self.m_HeightProbe:DestroyNavMeshAgent()
+        self.m_PositionProbe:DestroyNavMeshAgent()
         local pos = self:GetPos()
         local dir = pos - self.m_Player.m_Pos
         if dir.magnitude > 10 then
@@ -202,6 +208,7 @@ function GroundProbe:OnSceneLoaded()
                 self:SetPos(targetPos)
             end
         end
+
     end
     
     self:Reset()

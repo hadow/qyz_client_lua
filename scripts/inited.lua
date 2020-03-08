@@ -6,7 +6,7 @@ local SceneManager = require"scenemanager"
 local os = require "common.octets"
 
 local function init()
-	Game.Platform.Interface.Instance:Login();
+	--Game.Platform.Interface.Instance:Login();
 	SceneManager.RegisteOnLoginFinish(true)
 end
 

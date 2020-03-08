@@ -10,6 +10,7 @@ local fields
 local selectedServer
 local elapsedTime
 local bc
+local loginCode
 local function destroy()
 
 end
@@ -42,11 +43,11 @@ local function show(params)
     OpEnable(true)
     local bcObj = fields.UILabel_Change.gameObject
     bc = bcObj:GetComponent("BoxCollider")
-    if params and params.bNeedLogin then
-        Game.Platform.Interface.Instance:Login()
-    else
-        --uimanager.show"dlgnotice"
-    end
+    --if params and params.bNeedLogin then
+    --    Game.Platform.Interface.Instance:Login()
+    --else
+    --    --uimanager.show"dlgnotice"
+    --end
     selectedServer = getLatestLoginServer()
 end
 
@@ -59,8 +60,16 @@ local function serverLabelInfo(serverNum, serverName)
 end
 
 local function OnLoginSuccess()
+    print("auth.lua called loginsuccess")
     selectedServer = getLatestLoginServer()
+
+    local avatarmanager = require("roleheadavatarmanager")
+    if avatarmanager then
+        avatarmanager.init()
+    end
+
 end
+
 
 local function refresh(params)
     serverlist = GetServerList()
@@ -93,23 +102,33 @@ local function SetAnchor(fields)
     uimanager.SetAnchor(fields.UIWidget_BottomRight)
     uimanager.SetAnchor(fields.UIWidget_Center)
 end
+
+local function login(logincode)
+
+    loginCode = logincode
+    local loginstatus = Game.Platform.Interface.Instance:GetLoginStatus();
+    print("dlglogin.lua login status:"..loginstatus)
+    if loginstatus == -1 or loginstatus == 0 then
+        Game.Platform.Interface.Instance:Login(loginCode)
+    else
+        CameraManager.ActiveSunShaft()
+        saveLatestLoginServer(selectedServer)
+        network.connect()
+        OpEnable(false)
+    end
+end
 local function init(params)
     name, gameObject, fields = unpack(params)
     SetAnchor(fields)
+
+
     EventHelper.SetClick(fields.UILabel_Change, function()
         uimanager.show("dlgselectserver", getLatestLoginServer())
         OpEnable(false)
     end )
     EventHelper.SetClick(fields.UILabel_Server, function()
-		local loginstatus = Game.Platform.Interface.Instance:GetLoginStatus();
-		if loginstatus == -1 or loginstatus == 0 then
-			Game.Platform.Interface.Instance:Login()
-		else
-            CameraManager.ActiveSunShaft()
-			saveLatestLoginServer(selectedServer)
-			network.connect()
-            OpEnable(false)
-		end
+
+        login(0)
     end )
 
     EventHelper.SetClick(fields.UIButton_Announcement, function()
@@ -119,8 +138,23 @@ local function init(params)
 
     EventHelper.SetClick(fields.UILabel_Account,function()
         Game.Platform.Interface.Instance:Logout()
-        Game.Platform.Interface.Instance:Login()
+        Game.Platform.Interface.Instance:Login(Game.Platform.Interface.Instance:GetLoginCode());
+        --fields.UIWidget_Account.gameObject:SetActive(true)
+
     end)
+    --EventHelper.SetClick(fields.UIButton_Close,function ()
+    --    fields.UIWidget_Account.gameObject:SetActive(false)
+    --end)
+    --EventHelper.SetClick(fields.UIButton_Login,function ()
+    --
+    --    if(fields.UIInput_Account.value ~='' or fields.UIInput_Account.value ~=nil) then
+    --        --Game.Platform.Interface.Instance.set_m_userName(fields.UIInput_Account.value)
+    --        --Game.Platform.Interface.Instance.set_m_tokenId(fields.UIInput_Account.value)
+    --        Game.Platform.Interface.Instance:SetUserInfo(fields.UIInput_Account.value,fields.UIInput_Account.value)
+    --        Game.Platform.Interface.Instance:Login()
+    --        fields.UIWidget_Account.gameObject:SetActive(false)
+    --    end
+    --end)
 
     fields.UIButton_Scan.gameObject:SetActive(false)
 end
@@ -129,6 +163,10 @@ local function ResetSelectedServer(idx)
     selectedServer = idx
     network.setSelectedServer(selectedServer)
     refresh()
+end
+
+local function get_login_code()
+    return loginCode
 end
 
 return {
@@ -142,4 +180,5 @@ return {
     ResetSelectedServer = ResetSelectedServer,
     OpEnable = OpEnable,
     OnLoginSuccess = OnLoginSuccess,
+    get_login_code = get_login_code,
 }

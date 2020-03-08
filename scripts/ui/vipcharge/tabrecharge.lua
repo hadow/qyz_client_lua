@@ -230,6 +230,7 @@ end
 local function init(params)
      name, gameObject, fields = unpack(params)
 
+	uimanager.SetAnchor(fields.UITexture_Texture)
 	fields.UIButton_Return.gameObject:SetActive(false)
 --    EventHelper.SetClick(fields.UIButton_Return, function ()
 --        --uimanager.show("dlgmain_open")

@@ -67,7 +67,7 @@ end
 local function ShowGroup(type,time,target)
     if type then
         for _,obj in pairs(AllGroupObjects[type].obj) do
-            TweenAlpha.Begin(obj,time,target)
+            TweenAlpha.Begin(obj,time,target,0)
         end
         for _,particle in pairs(AllGroupObjects[type].particles) do
             particle:SetActive(target==1)
@@ -76,7 +76,7 @@ local function ShowGroup(type,time,target)
     else
         for _,group in pairs(AllGroupObjects) do
             for _,obj in pairs(group.obj) do
-                TweenAlpha.Begin(obj,time,target)
+                TweenAlpha.Begin(obj,time,target,0)
             end
             for _,particle in pairs(group.particles) do
                 particle:SetActive(target==1)

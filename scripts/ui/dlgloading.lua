@@ -71,6 +71,7 @@ end
 
 local function init(params)
     name, gameObject, fields = unpack(params)
+    uimanager.SetAnchor(fields.UITexture_Background)
     gameObject:SetActive(false)
     cfgMapLoading = ConfigManager.getConfig("maploading")
     AlterTexture()

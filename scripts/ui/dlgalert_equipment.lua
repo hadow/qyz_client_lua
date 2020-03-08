@@ -836,6 +836,7 @@ end
 local function init(params)
 	name, gameObject, fields = Unpack(params)
 
+	UIManager.SetAnchor(fields.UISprite_Black)
 	fields.UIGroup_EquipOnPlayer.gameObject:SetActive(false)
 
 	EventHelper.SetClick(fields.UIButton_EquipAlertDlg_Close, function()

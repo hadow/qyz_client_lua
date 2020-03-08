@@ -189,8 +189,8 @@ end
 local function show(params)
     -- print(name, "show")
     if params == nil then
-       logError("dlgtasktalk show params is nil")
-       return
+        logError("dlgtasktalk show params is nil")
+        return
     end
 
     taskid = params.taskid
@@ -227,7 +227,7 @@ local function update()
 end
 
 local function NextBtnOnClick()
-    local ret = PlayTalk() 
+    local ret = PlayTalk()
     print("dlgtasktalk PlayTalk():"..tostring(ret))
     if ret == true then
         uimanager.hidedialog("dlgtasktalk")
@@ -235,7 +235,7 @@ local function NextBtnOnClick()
         if task then
             local taskStatus = taskmanager.GetTaskStatus(task.id)
             if taskStatus == TaskStatusType.UnCommitted then
-                 taskmanager.CompleteTask(task.complete.npcid, task.id)
+                taskmanager.CompleteTask(task.complete.npcid, task.id)
             else
                 taskmanager.RefreshNPCShowHide(task)
                 if taskStatus ~= TaskStatusType.Doing then

@@ -43,6 +43,7 @@ end
 local function init(params)
     name, gameObject, fields = unpack(params)
 
+    uimanager.SetAnchor(fields.UISprite_Background)
 
     -- uiFadeIn.onFinished = {function()
     --     uiFadeOut:Play()

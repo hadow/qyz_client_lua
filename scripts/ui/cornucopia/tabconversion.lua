@@ -206,7 +206,9 @@ local function update()
 end
 
 local function init(params)
-    m_Name, m_GameObject, m_Fields = Unpack(params)   
+    m_Name, m_GameObject, m_Fields = Unpack(params)
+
+    UIManager.SetAnchor(fields.UITexture_BG)
     EventHelper.SetDrag(m_Fields.UITexture_Player,function(o,delta)
         if m_NPC then
             local npcObj=m_NPC.m_Object

@@ -29,8 +29,8 @@ end
 
 function StateNavToPos:CalculatePathByNavMesh()
     --printyellowmodule( Local.LogModuals.Navigate,"CalculatePathByNavMesh")
-    local path = UnityEngine.NavMeshPath()
-    local result = UnityEngine.NavMesh.CalculatePath(self.m_Player:GetPos(),self.m_TargetPos,UnityEngine.NavMesh.AllAreas,path )
+    local path = UnityEngine.AI.NavMeshPath()
+    local result = UnityEngine.AI.NavMesh.CalculatePath(self.m_Player:GetPos(),self.m_TargetPos,UnityEngine.AI.NavMesh.AllAreas,path )
     return path, result
 end
 
@@ -41,7 +41,7 @@ function StateNavToPos:CalculatePathByAgent()
         return nil, false
     end
 
-    local path = UnityEngine.NavMeshPath()
+    local path = UnityEngine.AI.NavMeshPath()
     local result = navmeshagent:CalculatePath(self.m_TargetPos, path)
     return path, result
 end

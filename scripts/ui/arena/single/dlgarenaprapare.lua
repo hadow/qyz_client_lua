@@ -187,6 +187,8 @@ end
 
 local function init(params)
     name, gameObject, fields = unpack(params)
+
+    --UIManager.SetAnchor(fields.UITexture_BG)
     fields.UIPlayTweens_Challenge.gameObject:SetActive(false)
 end
 local function uishowtype()

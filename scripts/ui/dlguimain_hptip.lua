@@ -45,7 +45,8 @@ local function SetItemIcon()
 	else
 		fields.UILabel_HPTips.gameObject:SetActive(false)    --不显示“药瓶不够”
 		local item = items1[1]
-		fields.UITexture_HPTips:SetIconTexture(item:GetRoundIconName())
+		fields.UITexture_HPTips:SetIconTextureWithAlpha(item:GetRoundIconName(),true)
+		print("item round icon name ->"..item:GetRoundIconName())
 
 	end
 end

@@ -33,6 +33,7 @@ local CdItems = {} --{index:{playerskilldata,cd,slider}}
 local function SetAutoFightState(isAutoFight)
     uimanager.call("dlguimain","SetAutoFightSprite",isAutoFight)
     fields.UISprite_FightingIcon.gameObject:SetActive(isAutoFight)
+    fields.UISprite_AutoFightIcon.gameObject:SetActive(~isAutoFight)
     AutoAI.Start(isAutoFight)
 end
 

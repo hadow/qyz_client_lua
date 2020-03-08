@@ -104,6 +104,9 @@ local NextDay = {}
 NextDay.n_MoudleShowTime = 0 --用于控制下级功能按钮显示
 NextDay.isOpen = false
 local  NextFunIsShow = true
+
+
+
 local function to2num(value)
     str = tostring(value + 100)
     return str:sub(2)
@@ -467,7 +470,8 @@ local function OnButton_Activity()
 end
 
 local function OnButton_Head()
-    uimanager.showdialog("dlgmain_open")
+    --uimanager.showdialog("dlgmain_open")
+    uimanager.showdialog("playerrole.dlgplayerrole")
 end
 
 local function OnButton_Family()
@@ -563,7 +567,8 @@ local function OnButtonReceiveRedPacket()
 end
 
 local function OnButtonFirstCharge()
-    uimanager.showdialog("vipcharge.dlgfirstofcharge")
+    --uimanager.showdialog("vipcharge.dlgfirstofcharge")
+    uimanager.showdialogonlyself("vipcharge.dlgfirstofcharge")
 end
 
 local function OnButtonReCharge()
@@ -573,6 +578,41 @@ end
 local function OnButtonSpringBonus()
     uimanager.showdialog("springbonus.dlgspringbonus")
 end
+
+--local function OnButtonSkill()
+--    uimanager.showdialog("skill.dlgskill")
+--end
+
+--local function OnButtonMaimai()
+--    uimanager.showdialog("maimai.dlgmaimai")
+--end
+
+--local function OnButtonPokedex()
+--    uimanager.showdialog("illustrates.dlgillustrate")
+--end
+
+--local function OnButtonAuction()
+--    uimanager.showdialog("exchange.dlgexchange")
+--end
+
+--local function OnButtonPharmacy()
+--
+--    local CarryShopManager = require("ui.carryshop.carryshopmanager")
+--    CarryShopManager.NavigateToCarryShopNPC()
+--end
+
+--local function OnButtonCornucopia()
+--    uimanager.showdialog("cornucopia.dlgcornucopia")
+--end
+
+--local function OnButtonAchievement()
+--    uimanager.showdialog("achievement.dlgachievement")
+--end
+
+--local function OnButtonTitle()
+--    uimanager.showdialog("title.dlgtitle")
+--end
+
 
 local function RegisterAllModules()
     ModuleList=
@@ -603,6 +643,41 @@ local function RegisterAllModules()
         [cfg.ui.FunctionList.SENDREDPACKET]       = {icon=fields.UIButton_Red, redDotFunc=(require("ui.activity.redpacket.redpacketmanager")).UnReadSend,callBackFunc=OnButtonSendRedPacket},
         [cfg.ui.FunctionList.RECEIVEREDPACKET]       = {icon=fields.UIButton_RedGet, redDotFunc=(require("ui.activity.redpacket.redpacketmanager")).UnReadReceive,callBackFunc=OnButtonReceiveRedPacket},
         [cfg.ui.FunctionList.SPRINGBONUS]   = {icon=fields.UIButton_Spring,redDotFunc=require("ui.springbonus.springbonusmanager").UnRead,callBackFunc=OnButtonSpringBonus},
+        --new add
+        [cfg.ui.FunctionList.SKILL]         ={icon=fields.UIButton_Skill,redDotFunc=require("character.skill.roleskill").UnRead,callBackFunc=function () uimanager.showdialog("skill.dlgskill") end},
+        [cfg.ui.FunctionList.MAIMAI]        ={icon=fields.UIButton_Maimai,callBackFunc=function ()uimanager.showdialog("maimai.dlgmaimai") end},
+        [cfg.ui.FunctionList.ILLUSTRATION]  ={icon=fields.UIButton_Pokedex,redDotFunc=require("character.pet.petmanager").HaveAwardPet,callBackFunc=function () uimanager.showdialog("illustrates.dlgillustrate") end},
+        [cfg.ui.FunctionList.EXCHANGE]      ={icon=fields.UIButton_Auction,redDotFunc=require("ui.exchange.exchangemanager").UnRead,callBackFunc=function () uimanager.showdialog("exchange.dlgexchange")
+        end},
+        [cfg.ui.FunctionList.PHARMACY]      ={icon=fields.UIButton_Shop,callBackFunc=function()
+            local CarryShopManager = require("ui.carryshop.carryshopmanager")
+            CarryShopManager.NavigateToCarryShopNPC()
+        end},
+        [cfg.ui.FunctionList.CORNUCOPIA]    ={icon=fields.UIButton_ResourseEx,redDotFunc=require("ui.cornucopia.compressmanager").UnRead,callBackFunc=function ()
+            uimanager.showdialog("cornucopia.dlgcornucopia")
+
+        end},
+        [cfg.ui.FunctionList.ACHIEVEMENT]   ={icon=fields.UIButton_Achievement,redDotFunc=require("ui.achievement.achievementmanager").UnRead,callBackFunc=function ()
+            uimanager.showdialog("achievement.dlgachievement")
+        end},
+        [cfg.ui.FunctionList.TITLE]         ={icon=fields.UIButton_Title,redDotFunc=require("ui.title.titlemanager").UnRead,callBackFunc=function ()
+            uimanager.showdialog("title.dlgtitle")
+        end},
+        [cfg.ui.FunctionList.MAIL]          ={icon=fields.UIButton_Email,redDotFunc=require("ui.mail.mailmanager").UnRead,callBackFunc=function()
+            uimanager.showdialog("mail.dlgmail")
+        end},
+        [cfg.ui.FunctionList.SETTING]       ={icon=fields.UIButton_Community,redDotFunc=require("character.settingmanager").UnRead,callBackFunc=function()
+            uimanager.showdialog("dlgautofight")
+        end },
+        [cfg.ui.FunctionList.MOUNT]         ={icon=fields.UIButton_Ride,redDotFunc=require("ui.ride.ridemanager").UnRead,callBackFunc=function()
+            uimanager.showdialog("ride.dlgridedisplay")
+        end},
+        [cfg.ui.FunctionList.FASHION]       ={icon=fields.UIButton_Fashion,redDotFunc=require("character.fashionmanager").UnRead,callBackFunc=function()
+            uimanager.showdialog("dlgfashion",{fashiontype="role"})
+        end},
+
+
+
     }
 end
 
@@ -1465,10 +1540,10 @@ local function init(params)
     end )
 
 
-	EventHelper.SetClick(fields.UIButton_QQVip, function()
-        uimanager.showdialog("dlgqqvip")
-
-    end )
+	--EventHelper.SetClick(fields.UIButton_QQVip, function()
+    --    uimanager.showdialog("dlgqqvip")
+    --
+    --end )
 
     EventHelper.SetClick(fields.UIButton_TeamTab, function()
         fields.UIGroup_ItemTeam.gameObject:SetActive(true)
@@ -1533,12 +1608,23 @@ local function init(params)
     EventHelper.SetClick(fields.UIGroup_Vip, OnUIGroup_Vip)
     m_expPrg = fields.UIProgressBar_EXP.gameObject:GetComponent("UIProgressBar")
     EventHelper.SetClick(fields.UIButton_Lottery, OnButtonLottery)
-	  local channelid = Game.Platform.Interface.Instance:GetSDKPlatform()
-	  if channelid == 39 then
-		    fields.UIButton_QQVip.gameObject:SetActive(true)
-	  else
-		    fields.UIButton_QQVip.gameObject:SetActive(false)
-	  end
+	  --local channelid = Game.Platform.Interface.Instance:GetSDKPlatform()
+	  --if channelid == 39 then
+		--    fields.UIButton_QQVip.gameObject:SetActive(true)
+	  --else
+		--    fields.UIButton_QQVip.gameObject:SetActive(false)
+	  --end
+
+    EventHelper.SetClick(fields.UIButton_Warehouse,function()
+
+        local depotmanager = require("character.depotmanager")
+        depotmanager.NavigateToDepotNPC()
+    end)
+
+    EventHelper.SetClick(fields.UIButton_Mission,function ()
+
+        uimanager.showdialog("dlgtask")
+    end)
     local ResurgenceBiyaoManager= require("ui.resurgencebiyao.resurgencebiyaomanager")
     ResurgenceBiyaoManager.isShowNpc()
 end

@@ -102,6 +102,7 @@ end
 
 local function init(params)
     name ,gameObject,fields = unpack(params)
+    uimanager.SetAnchor(fields.UISprite_Black)
     StatusText = ConfigManager.getConfig("statustext")
     InitUI()
     EventHelper.SetClick(fields.UILabel_DetailKarma,function()

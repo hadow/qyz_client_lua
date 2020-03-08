@@ -10,14 +10,14 @@ Screen			= UnityEngine.Screen
 Camera			= UnityEngine.Camera
 Material 		= UnityEngine.Material
 Renderer 		= UnityEngine.Renderer
-AsyncOperation	= UnityEngine.AsyncOperation
+--AsyncOperation	= UnityEngine.AsyncOperation
 Color           = UnityEngine.Color
 Vector3         = UnityEngine.Vector3
 Vector2         = UnityEngine.Vector2
 Quaternion      = UnityEngine.Quaternion
 Mathf           = UnityEngine.Mathf
 Shader          = UnityEngine.Shader
-CharacterController = UnityEngine.CharacterController
+--CharacterController = UnityEngine.CharacterController
 SkinnedMeshRenderer = UnityEngine.SkinnedMeshRenderer
 Animator		= UnityEngine.Animator
 Animation       = UnityEngine.Animation
@@ -45,7 +45,7 @@ WWW				= UnityEngine.WWW
 AnimationBlendMode = UnityEngine.AnimationBlendMode
 EffectPool = Game.EffectPool
 DontDestroyOnLoad = UnityEngine.Object.DontDestroyOnLoad
-DestroyImmadiate = GameObject.DestroyImmediate
+--DestroyImmadiate = GameObject.DestroyImmediate
 OctetsStream = Aio.OctetsStream
 Octets = Aio.Octets
 RangeCube = Game.RangeCube
@@ -135,20 +135,30 @@ end
 local loggermanager
 
 function print(...)
-    if not Local.LogManager or not loggermanager then return end
+
     local args = {...}
     for k, v in ipairs(args) do
         args[k] = tostring(v)
     end
-    if Local.LogTraceback then
-        unity_log(concat(args, '\t') .. '\t' .. debug.traceback())
-		loggermanager.LogDebug(concat(args, '\t') .. '\t' .. debug.traceback())
-    else
-        unity_log(concat(args, '\t'))
-		loggermanager.LogDebug(concat(args, '\t'))
-    end
-    --logError(debug.traceback())
+    unity_log(concat(args, '\t'))
+
 end
+
+--function print(...)
+--    if not Local.LogManager or not loggermanager then return end
+--    local args = {...}
+--    for k, v in ipairs(args) do
+--        args[k] = tostring(v)
+--    end
+--    if Local.LogTraceback then
+--        unity_log(concat(args, '\t') .. '\t' .. debug.traceback())
+--		loggermanager.LogDebug(concat(args, '\t') .. '\t' .. debug.traceback())
+--    else
+--        unity_log(concat(args, '\t'))
+--		loggermanager.LogDebug(concat(args, '\t'))
+--    end
+--    --logError(debug.traceback())
+--end
 
 local print = print
 
@@ -499,4 +509,9 @@ function GetBroadCastUrl()
         return Local.BroadCastUrls[BroadCastUrlMap[Channels.OTHERS]]
     end
     -- return Local.BroadCastUrls[BroadCastUrlMap[channelid] or 1]
+end
+
+function GetHeadAvatarUrl()
+
+    return Game.Platform.Interface.Instance:GetAvatar()
 end

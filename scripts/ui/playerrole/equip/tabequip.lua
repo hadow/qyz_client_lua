@@ -68,7 +68,8 @@ local function ResetPlayerEquipSlotList()
 		listItem:SetText("UILabel_AnnealLevel", "+0")
 		listItem.Controls["UILabel_AnnealLevel"].gameObject:SetActive(false)
 		listItem.Controls["UISprite_Binding"].gameObject:SetActive(false)
-		listItem.Controls["UISprite_Quality"].color = Color(1,1,1,1)
+		--listItem.Controls["UISprite_Quality"].color = Color(1,1,1,1)
+		listItem.Controls["UISprite_Quality"].gameObject:SetActive(false)
 		listItem:GetLabel(format("UILabel_%02d", i)).gameObject:SetActive(true)
         listItem.Controls["UILabel_NotOpen"].gameObject:SetActive(false)
 	end
@@ -111,8 +112,8 @@ local function RefreshPlayerEquip()
 
 			        -- 设置品质
 			        listItem.Controls["UISprite_Quality"].gameObject:SetActive(true)
-			        listItem.Controls["UISprite_Quality"].spriteName = "Sprite_ItemQuality"
-			        listItem.Controls["UISprite_Quality"].color = colorutil.GetQualityColor(equip:GetQuality())
+			        listItem.Controls["UISprite_Quality"].spriteName = "Sprite_Quality_"..(equip:GetQuality())
+			        --listItem.Controls["UISprite_Quality"].color = colorutil.GetQualityColor(equip:GetQuality())
 
 		        end
             --end
@@ -139,8 +140,8 @@ local function RefreshPlayerEquip()
 
 			    -- 设置品质
 			    listItem.Controls["UISprite_Quality"].gameObject:SetActive(true)
-			    listItem.Controls["UISprite_Quality"].spriteName = "Sprite_ItemQuality"
-			    listItem.Controls["UISprite_Quality"].color = colorutil.GetQualityColor(equip:GetQuality())
+			    listItem.Controls["UISprite_Quality"].spriteName = "Sprite_Quality_"..(equip:GetQuality())
+			    --listItem.Controls["UISprite_Quality"].color = colorutil.GetQualityColor(equip:GetQuality())
 
 		    end
 		    -- 有装备装载上,播放UI特效

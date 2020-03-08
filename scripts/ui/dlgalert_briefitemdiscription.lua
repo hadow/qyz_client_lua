@@ -105,6 +105,7 @@ end
 local function init(params)
   name, gameObject, fields = unpack(params)
 
+    UIManager.SetAnchor(fields.UISprite_Black)
   EventHelper.SetClick(fields.UIGroup_Container_Block,function()
 	UIManager.hide(name)
   end)

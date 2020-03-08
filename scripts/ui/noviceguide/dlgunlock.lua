@@ -90,7 +90,7 @@ end
 
 local function init(params)
     m_Name, m_GameObject, m_Fields = Unpack(params)  
-    m_EffectObject=m_GameObject.transform:FindChild("ui_unlock")
+    m_EffectObject=m_GameObject.transform:Find("ui_unlock")
     m_Particle=m_Fields.UIGroup_ShereLightEffect.gameObject:GetComponent("ParticleSystem")
 end
 

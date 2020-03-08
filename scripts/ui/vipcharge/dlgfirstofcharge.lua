@@ -139,6 +139,7 @@ end
 local function init(params)
      name, gameObject, fields = unpack(params)
 
+	--uimanager.SetAnchor(fields.UITexture_BG)
 	fields.UIButton_Return.gameObject:SetActive(false)
 	--fields.UITexture_AD:SetIconTexture("ICON_FirstOfCharge_BG01")
 
@@ -152,6 +153,11 @@ local function init(params)
 
         uimanager.showdialog("vipcharge.dlgrecharge")
     end)
+
+	EventHelper.SetClick(fields.UIButton_Return,function()
+
+		uimanager.hidecurrentdialog()
+	end)
 
 
 

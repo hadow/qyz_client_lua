@@ -126,7 +126,7 @@ local function OnMountLoaded()
                 modelTrans.parent = m_Fields.UITexture_3DModel.transform
                 ExtendedGameObject.SetLayerRecursively(modelObj,Define.Layer.LayerUICharacter)
                 modelObj:SetActive(false)
-                local skin=modelObj.transform:FindChild(m_Mount.m_ModelPath)
+                local skin=modelObj.transform:Find(m_Mount.m_ModelPath)
                 if not IsNull(skin) then
                     local meshRenderList=skin:GetComponentsInChildren(SkinnedMeshRenderer,true)
                     if not IsNull(meshRenderList) then
@@ -439,6 +439,8 @@ local function init(params)
     m_FirstLoad=true
     m_CanClick=true
     m_Name, m_GameObject, m_Fields = Unpack(params)
+
+    UIManager.SetAnchor(fields.UITexture_BG)
     ClearData()
     RideManager.SendCGetRideInfo()
     EventHelper.SetDrag(m_Fields.UITexture_3DModel,function (go,delta)

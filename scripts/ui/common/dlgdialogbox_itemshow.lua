@@ -45,6 +45,8 @@ end
 
 local function init(params)
     name, gameObject, fields    = unpack(params)
+
+    UIManager.SetAnchor(fields.UISprite_Back)
     EventHelper.SetClick(fields.UIButton_Back,function()
         --printyellow("AAAAAAAAAAAAAA",name)
         UIManager.hide(name)

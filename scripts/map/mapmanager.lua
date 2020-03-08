@@ -179,8 +179,8 @@ local function IsValidNavigatePos(params)
     local height = SceneManager.GetHeight(pos)
     if height > cfg.map.Scene.HEIGHTMAP_MIN then
         pos.y = height
-        local path = UnityEngine.NavMeshPath()
-        result = UnityEngine.NavMesh.CalculatePath(pos,GetBornPos(mapId),UnityEngine.NavMesh.AllAreas,path )
+        local path = UnityEngine.AI.NavMeshPath()
+        result = UnityEngine.AI.NavMesh.CalculatePath(pos,GetBornPos(mapId),UnityEngine.AI.NavMesh.AllAreas,path )
     end   
     return result
 end

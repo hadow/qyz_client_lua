@@ -22,7 +22,7 @@ end
 
 local function init(params)
     name, gameObject, fields    = unpack(params)
-    
+    UIManager.SetAnchor(fields.UISprite_Black)
     EventHelper.SetClick(fields.UISprite_Click,function()
         UIManager.hide(name)
     end)

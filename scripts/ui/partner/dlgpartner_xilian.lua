@@ -130,6 +130,8 @@ end
 
 local function init(params)
     name,gameObject,fields = unpack(params)
+
+    uimanager.SetAnchor(fields.UISprite_Black)
     StatusText = ConfigManager.getConfig("statustext")
     CfgWash = ConfigManager.getConfig("petwash")
     uiInit()
